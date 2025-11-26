@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+jinja2
+joblib
+scikit-learn
+reportlab
+openpyxl
+numpy

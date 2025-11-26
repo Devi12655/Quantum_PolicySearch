@@ -1,0 +1,143 @@
+/* ===== GLOBAL ===== */
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #f4f8ff;
+    margin: 0;
+    color: #0b2540;
+}
+
+/* ===== HEADER ===== */
+.header {
+    background: linear-gradient(90deg, #0a2ef5, #1324bd, #1d2585);
+    padding: 40px 0;
+    text-align: center;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 16px rgba(27, 5, 227, 0.461);
+}
+
+
+
+.header .sub {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #dfe0e8;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 18px;
+    border: 1px solid #e8efff;
+    box-shadow: 0 3px 10px rgba(23,0,0,0.04);
+}
+
+/* ===== INPUTS ===== */
+.search-input,
+input[type="file"],
+.k-input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #cfdcf3;
+    background: #ffffff;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.search-input:focus,
+.k-input:focus {
+    border-color: #0b6df0;
+    box-shadow: 0 0 0 3px rgba(11,109,240,0.15);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+    background: linear-gradient(90deg, #0b6df0, #3aa0ff);
+    border: none;
+    padding: 10px 16px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    font-weight: 600;
+}
+
+.btn:hover {
+    background: #095bd7;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+    color: #0b6df0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESULT CARDS ===== */
+.result-card {
+    background: #ffffff;
+    border: 1px solid #e5edff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    transition: 0.2s ease-in-out;
+}
+
+.result-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(11,109,240,0.18);
+}
+
+/* ===== META ===== */
+.meta {
+    color: #58739e;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+/* ===== DOWNLOAD LINKS ===== */
+.actions a {
+    font-weight: 600;
+    color: #0b6df0;
+    margin-right: 12px;
+    text-decoration: none;
+    transition: 0.15s;
+}
+
+.actions a:hover {
+    color: #084db5;
+    text-decoration: underline;
+}
+
+/* ===== CHART CARD ===== */
+.chart-container {
+    background: #ffffff;
+    border: 1px solid #e6edff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+    margin-top: 28px;
+}
+
+.glow-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(202, 212, 228, 0.8);
+}
+

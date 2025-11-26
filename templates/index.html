@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quantum Policy Search — Clean v6</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Main Glow CSS -->
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <h1>⚛️ Quantum Policy Search</h1>
+      <p class="sub">Search policies using the quantum model</p>
+    </div>
+  </header>
+
+  <!-- Main Section -->
+  <main class="container">
+
+    <section class="card">
+      <h2>🔍 Search Policies</h2>
+
+      <!-- Search Form -->
+      <form action="/search" method="post" class="search-row">
+        <input 
+          type="text" 
+          name="query" 
+          placeholder="Enter search query (e.g. health reform)" 
+          class="search-input" 
+          required>
+
+        <label for="k" class="k-label">Top</label>
+        <input 
+          type="number" 
+          id="k" 
+          name="k" 
+          value="6" 
+          min="1" 
+          max="50" 
+          class="k-input">
+
+        <button class="btn" type="submit">🔎 Run Search</button>
+      </form>
+
+      <!-- Message Section -->
+      {% if message %}
+        <div class="alert">{{ message }}</div>
+      {% endif %}
+
+      <p class="hint">
+        Model must be present in project root as 
+        <code>quantum_model.pkl</code>.
+      </p>
+    </section>
+
+  </main>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

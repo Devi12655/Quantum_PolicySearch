@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quantum Policy Search — Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    .result-card{
+      border:1px solid #e6eef9;
+      padding:16px;
+      border-radius:12px;
+      margin-bottom:16px;
+      background:white;
+      box-shadow:0 2px 8px rgba(0,0,0,0.03);
+    }
+    .progress-bar{height:12px;background:#eef5fb;border-radius:8px;overflow:hidden}
+    .progress-fill{height:100%;background:linear-gradient(90deg,#3aa0ff,#0b6df0)}
+
+    /* Glow UI improvements */
+    .glow-title{
+      font-weight:600;
+      color:#0b6df0;
+      text-shadow:0 0 8px rgba(59,130,246,0.3);
+    }
+    .chart-container{
+      background:white;
+      padding:20px;
+      border-radius:14px;
+      box-shadow:0 3px 12px rgba(0,0,0,0.05);
+      margin-top:20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="glow-title">⚛️ Quantum Policy Search</h1>
+      <p class="sub">Results for “{{ query }}” — Ranked by Quantum Similarity</p>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- RESULTS SECTION -->
+    <section class="card">
+      {% if results %}
+        {% for r in results %}
+          <div class="result-card">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <div><strong>{{ r.title }}</strong></div>
+              <div>{{ (r.score*100)|round(1) }}%</div>
+            </div>
+
+            <div class="meta">
+              📍 {{ r.region or "All India" }} |
+              📅 {{ r.year or "N/A" }} |
+              🧩 {{ r.status or "Unknown" }}
+            </div>
+
+            <div style="margin-top:8px">{{ r.summary }}</div>
+
+            <div class="actions" style="margin-top:10px">
+              <a href="/download/pdf/{{ loop.index0 }}">📄 PDF</a>
+              <a href="/download/xlsx/{{ loop.index0 }}">📘 Excel</a>
+              <a href="/download/txt/{{ loop.index0 }}">🧩 Text</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No results found. Try another query.</p>
+      {% endif %}
+    </section>
+
+
+    <!-- RELEVANCE CHART -->
+    <div class="chart-container">
+      <h3 class="glow-title" style="text-align:center;margin-bottom:10px;">Relevance Score Chart</h3>
+      <canvas id="relevanceChart" height="140"></canvas>
+    </div>
+
+    <a href="/" class="back-btn" style="margin-top:20px;display:inline-block">⬅️ Back to Search</a>
+
+  </main>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+    try {
+        // FIX: JSON treated as string so VS Code does not break
+        const scores = JSON.parse(`{{ scores_data | tojson | safe }}`);
+
+        const labels = Object.keys(scores);
+        const values = Object.values(scores);
+
+        const ctx = document.getElementById("relevanceChart").getContext("2d");
+
+        const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+        gradient.addColorStop(0, "rgba(59,130,246,0.85)");
+        gradient.addColorStop(1, "rgba(59,130,246,0.15)");
+
+        new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Relevance Score",
+                    data: values,
+                    borderColor: "#3aa0ff",
+                    backgroundColor: gradient,
+                    fill: true,
+                    tension: 0.35,
+                    pointRadius: 6,
+                    pointBackgroundColor: "#0b6df0",
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: "rgba(0,0,0,0.08)" }
+                    },
+                    x: {
+                        ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        labels: { color: "#0b6df0" }
+                    },
+                    tooltip: {
+                        backgroundColor: "#0b6df0",
+                        titleColor: "#fff",
+                        bodyColor: "#fff"
+                    }
+                }
+            }
+        });
+
+    } catch (e) {
+        console.log("Chart error:", e);
+    }
+});
+</script>
+
+
+</body>
+</html>
